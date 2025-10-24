@@ -14,3 +14,8 @@ Note :- First, the main thing is to create this API step by step and one by one.
 - 8 Student MarkSheet Details controller
 
 // Frontend Mindeset first make a all Pages accordingly which they belong to Api Endpoints only then affer that figure out how to attact how many other additional pages are required to create and how to store get data on the pages and then figure out how to make a impressive user interface.
+
+
+// create one avatar upload componen because every where register or inside app where we are most of time using a uplaod image feature that's why we are asking from you create a one avatar uplaod a components.
+
+// Making a some feature only accessible in the frontend we are not sending a that data at backend. Means if user student come first time and he will select student option but we are also show a one more option to select their department because once a department fetch and validate we are show data according to that department at the selecting field . And we are also store a that department data their local storage for better options.

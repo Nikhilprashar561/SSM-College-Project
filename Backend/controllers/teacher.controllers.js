@@ -70,8 +70,8 @@ const TeacherRegister = async (req, res) => {
 
   const createTeacher = await TeacherModels.create({
     firstname,
-    department,
     lastname,
+    department,
     email,
     password: hashPassword,
     mobile_no,
