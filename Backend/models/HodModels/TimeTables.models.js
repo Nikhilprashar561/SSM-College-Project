@@ -45,7 +45,7 @@ const timeTableSchema = new mongoose.Schema(
       default: Date.now(),
     },
     days: {
-      type: [String],
+      type: String,
       required: true,
       trim: true,
       enum: [

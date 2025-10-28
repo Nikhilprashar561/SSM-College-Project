@@ -1,8 +1,13 @@
 import { helpModels } from "../models/HelpModels/help.models.js";
+import { dateSheetModels } from "../models/HodModels/DateSheet.models.js";
 import { HodModels } from "../models/HodModels/hod.models.js";
+import { paperAssignPlaceModels } from "../models/HodModels/PaperAssignPlace.models.js";
+import { timeTableModels } from "../models/HodModels/TimeTables.models.js";
 import { PrincipalModels } from "../models/PrincipalModels/principal.models.js";
 import { TeacherModels } from "../models/TeacherModels/teacher.models.js";
+import { AssignTaskModels } from "../models/UtilsModels/AssignTask.models.js";
 import { EventsModels } from "../models/UtilsModels/Event.models.js";
+import { NotificationsModels } from "../models/UtilsModels/Notifications.models.js";
 import { sentMoneyReqModels } from "../models/UtilsModels/sentRequestMoney.models.js";
 import { ApiErrors } from "../utils/ApiError.js";
 import { ApiRes } from "../utils/ApiRes.js";
@@ -79,6 +84,9 @@ const userHelpController = async (req, res) => {
   const imagePath = req?.files?.image[0]?.path;
   let imageLink;
   if (imagePath) {
+    if (!imagePath) {
+      throw new ApiErrors(400, "Image was not found");
+    }
     const image = await uploadOnCloudinary(imagePath);
     if (!image) {
       throw new ApiErrors(400, "Sorry Image was not found");
@@ -123,8 +131,8 @@ const sentRequestByMoneyController = async (req, res) => {
   if (!["teacher", "student", "hod"].includes(checkRequest)) {
     throw new ApiErrors(400, "Unauthorized request");
   }
-  if(user?.role != checkRequest){
-    throw new ApiErrors(400, "You have not access to sent request")
+  if (user?.role != checkRequest) {
+    throw new ApiErrors(400, "You have not access to sent request");
   }
   // if(!mongoose.Types.ObjectId.isValid)
   const createRequest = await sentMoneyReqModels.create({
@@ -149,15 +157,346 @@ const sentRequestByMoneyController = async (req, res) => {
     );
 };
 
-const timeTableController = async (req, res) => {};
+const timeTableController = async (req, res) => {
+  const {
+    title,
+    className,
+    room_no,
+    date,
+    days,
+    collegeName,
+    department,
+    timeTable,
+  } = req.body;
+  if (
+    !title ||
+    !className ||
+    !room_no ||
+    !date ||
+    !days ||
+    !collegeName ||
+    !timeTable ||
+    !department
+  ) {
+    throw new ApiErrors(400, "All fields are required");
+  }
 
-const NotificationController = async (req, res) => {}; // Anyone user can access but not student
+  const user = req?.user;
 
-const DateSheetController = async (req, res) => {};
+  console.log(`Yeh hai Behn ka loda user ${user}`);
 
-const PaperAssignController = async (req, res) => {};
+  if (user.department != department) {
+    throw new ApiErrors(
+      400,
+      "Sorry to say but you have a not access to create these class Time table"
+    );
+  }
 
-const AssignTaskController = async (req, res) => {}; // Anyone user can access but not student
+  // console.log(timeTable);
+  const checkTimeTable = await timeTableModels.findOne({
+    $or: [{ className }, { room_no }],
+  });
+  if (checkTimeTable) {
+    if (checkTimeTable.className === className) {
+      throw new ApiErrors(400, "This class timetable is already created");
+    } else if (checkTimeTable.room_no === room_no) {
+      throw new ApiErrors(400, "This room timetable is already created");
+    } else if (checkTimeTable.timeTable) {
+      throw new ApiErrors(400, "This class is already assigned to a teacher");
+    }
+  }
+
+  const createTimeTable = await timeTableModels.create({
+    className,
+    collegeName,
+    date,
+    days,
+    department,
+    room_no,
+    timeTable,
+    title,
+    createdBy: user?._id,
+  });
+  if (!createTimeTable) {
+    throw new ApiErrors(400, "Some Error was occur to create a Time Table");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiRes(
+        201,
+        { Data: createTimeTable, user: user },
+        "Class Time Table was created Successfully"
+      )
+    );
+};
+
+const NotificationController = async (req, res) => {
+  const { collegeName, text, description, date, day, department, className } =
+    req.body;
+  if (!text || !description || !collegeName) {
+    throw new ApiErrors(400, "Text and descriptions are required");
+  }
+  const user = req?.user;
+  if (user.role == "student") {
+    throw new ApiErrors(400, "You have not authority to access these page.");
+  }
+  const imagePath = req?.files?.image[0]?.path;
+  let imageLink;
+  if (imagePath) {
+    if (!imagePath) {
+      throw new ApiErrors(400, "Image was not found");
+    }
+    const image = await uploadOnCloudinary(imagePath);
+    if (!image) {
+      throw new ApiErrors(400, "Sorry Image was not found");
+    }
+    imageLink = image.secure_url;
+  }
+  const createNotification = await NotificationsModels.create({
+    className: className ? className : "For Every Classes",
+    collegeName,
+    checkModel: user?.role,
+    file: imageLink,
+    date,
+    day,
+    department: department ? department : "Latest Notification",
+    text,
+    description,
+    createdBy: user?._id,
+  });
+  if (!createNotification) {
+    throw new ApiErrors(400, "Error occure while create a notification");
+  }
+  return res
+    .status(201)
+    .json(
+      new ApiRes(
+        200,
+        { data: createNotification, user: user?.firstname },
+        "Notification created SuccessFully"
+      )
+    );
+}; // Anyone user can access but not student
+
+const AssignTaskController = async (req, res) => {
+  const {
+    task,
+    description,
+    assignedToRole,
+    className,
+    date,
+    timing,
+    days,
+    collageName,
+    dueDate,
+  } = req.body;
+  if (
+    !task ||
+    !description ||
+    !assignedToRole ||
+    !date ||
+    !timing ||
+    !days ||
+    !dueDate
+  ) {
+    throw new ApiErrors(400, "All fields are required");
+  }
+  const user = req?.user;
+  let principalRole;
+  let teacherAndHod;
+  if (user?.role == "pricipal") {
+    principalRole = "For Every Department";
+  }
+  if (user?.role == "teacher" || user?.role == "hod") {
+    teacherAndHod = user?.department;
+  }
+  const imagePath = req?.files?.image[0]?.path;
+  let imageLink;
+  if (imagePath) {
+    if (!imagePath) {
+      throw new ApiErrors(400, "Image was not found");
+    }
+    const image = await uploadOnCloudinary(imagePath);
+    if (!image) {
+      throw new ApiErrors(400, "Sorry Image was not found");
+    }
+    imageLink = image.secure_url;
+  }
+  const createAssignTask = await AssignTaskModels.create({
+    assignedToRole,
+    assignedByRole: user?.role,
+    collageName,
+    className: className ? className : "For Every Classes",
+    date,
+    days,
+    department: principalRole ? principalRole : teacherAndHod,
+    description,
+    dueDate,
+    images: imageLink,
+    task,
+    timing,
+    createdBy: user?._id,
+  });
+  if (!createAssignTask) {
+    throw new ApiErrors(400, "Error occur while creating a assign taks");
+  }
+  return res
+    .status(200)
+    .json(
+      new ApiRes(
+        201,
+        { data: createAssignTask, user: user?.firstname },
+        "Assign task created successfully"
+      )
+    );
+}; // Anyone user can access but not student
+
+const PaperAssignController = async (req, res) => {
+  const {
+    collegeName,
+    className,
+    room_no,
+    paper,
+    timing,
+    subject,
+    teacherDuty,
+    roll_no,
+    date,
+    day,
+  } = req.body;
+  if (
+    !collegeName ||
+    !className ||
+    !room_no ||
+    !paper ||
+    !timing ||
+    !subject ||
+    !teacherDuty ||
+    !roll_no ||
+    !date ||
+    !day
+  ) {
+    throw new ApiErrors(400, "All fields are required");
+  }
+  const check = await paperAssignPlaceModels.findOne({
+    $or: [
+      { className },
+      { room_no },
+      { subject },
+      { teacherDuty },
+      { roll_no },
+    ],
+  });
+  if (check) {
+    if (check.className === className) {
+      throw new ApiErrors(
+        400,
+        "These class already assign for the Paper Place"
+      );
+    } else if (check.room_no === room_no) {
+      throw new ApiErrors(400, "These Room already assign for the Paper Place");
+    } else if (check.subject === subject) {
+      throw new ApiErrors(
+        400,
+        "These Subject already assign for the Paper Place"
+      );
+    } else if (check.teacherDuty === teacherDuty) {
+      throw new ApiErrors(
+        400,
+        "These Teacher already assign for the Paper Place"
+      );
+    } else {
+      throw new ApiErrors(
+        400,
+        "These Roll Number already assign for the Paper Place"
+      );
+    }
+  }
+  const user = req?.user;
+  const createPaperPlace = await paperAssignPlaceModels.create({
+    className,
+    collegeName,
+    date,
+    day,
+    department: user?.department,
+    paper,
+    roll_no,
+    room_no,
+    subject,
+    teacherDuty,
+    timing,
+    cretaedBy: user?._id,
+  });
+  if (!createPaperPlace) {
+    throw new ApiErrors(
+      400,
+      "Error occur when we are create a Paper Assign Place"
+    );
+  }
+  return res
+    .status(201)
+    .json(
+      new ApiRes(
+        200,
+        { data: createPaperPlace, user: user?.firstname + user?.lastname },
+        "Paper Place Assign Classes created sucessfully"
+      )
+    );
+};
+
+const DateSheetController = async (req, res) => {
+  const { paper, className, collegeName, department, description, subjects } =
+    req.body;
+  if (
+    !paper ||
+    !className ||
+    !collegeName ||
+    !department ||
+    !description ||
+    !subjects
+  ) {
+    throw new ApiErrors(400, "All Fields are required");
+  }
+  const check = await dateSheetModels.findOne({ className: className });
+  if (check) {
+    if (check.className === className) {
+      throw new ApiErrors(
+        400,
+        "Sorry 😒 but these class already datesheet created"
+      );
+    }
+  }
+  const user = req?.user;
+  if (user?.department != department) {
+    throw new ApiErrors(
+      400,
+      "You have not access to create these department Date Sheet"
+    );
+  }
+  const CreateDateSheet = await dateSheetModels.create({
+    className,
+    collegeName,
+    department,
+    description,
+    paper,
+    subjects,
+    createdBy: user?._id,
+  });
+  if (!CreateDateSheet) {
+    throw new ApiErrors(400, "Some Error Occur when we are create a Datesheet");
+  }
+  return res
+    .status(200)
+    .json(
+      new ApiRes(
+        201,
+        { data: CreateDateSheet, user: `${user?.firstname} ${user?.lastname}` },
+        `DateSheet was created for ${className} successfully`
+      )
+    );
+};
 
 const studentMarkSheetController = async (req, res) => {};
 

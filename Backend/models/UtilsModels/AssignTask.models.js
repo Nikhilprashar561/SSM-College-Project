@@ -29,8 +29,8 @@ const AssignTaskSchema = new mongoose.Schema(
     assignedToRole: {
       // Here we are validate which type of user we are sent to request for task.
       type: String,
-      lowercase: true,
-      enum: ["hod", "teacher", "student"],
+      // lowercase: true,
+      enum: ["Hod", "Teacher", "Student"],
       required: true,
     },
     department: {
@@ -47,7 +47,7 @@ const AssignTaskSchema = new mongoose.Schema(
       default: Date.now(),
     },
     timing: {
-      type: Date,
+      type: String,
       required: true,
     },
     days: {

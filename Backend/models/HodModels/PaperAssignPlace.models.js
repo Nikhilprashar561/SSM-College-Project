@@ -51,7 +51,7 @@ const paperAssignPlaceSchema = new mongoose.Schema(
       required: true,
     },
     timing: {
-      type: Date,
+      type: String,
       required: true,
     },
     subject: {
