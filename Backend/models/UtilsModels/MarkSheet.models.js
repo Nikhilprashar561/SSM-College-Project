@@ -2,8 +2,40 @@
 
 import mongoose from "mongoose";
 
+const studentDetails = new mongoose.Schema({
+  studentName: {
+    type: String,
+    required: true,
+  },
+  roll_no: {
+    type: Number,
+    required: true,
+  },
+  fatherName: {
+    type: String,
+    required: true,
+  },
+  mobile_no: {
+    type: String,
+    required: true,
+  },
+  totakMark: {
+    type: Number,
+    required: true,
+  },
+  studentGetMark: {
+    type: Number,
+    required: true,
+  },
+  overallResult: {
+    type: String,
+    required: true,
+  },
+});
+
 const MarkSheetSchema = new mongoose.Schema(
   {
+    studentsDetails: [studentDetails],
     className: {
       type: String,
       required: true,
@@ -57,7 +89,6 @@ const MarkSheetSchema = new mongoose.Schema(
         "Sunday",
       ],
     },
-    studentDetails: [], // Here Student details
     pdfLink: {
       // Pdf Link Who Create after Marksheet Done
       type: String,
@@ -80,11 +111,6 @@ const MarkSheetSchema = new mongoose.Schema(
         ],
         message: "Invalid department. Not allowed.",
       },
-    },
-    overallPerformance: {
-      // Store Overall Result it is Pass or fail
-      type: String,
-      default: true,
     },
   },
   { timestamps: true }

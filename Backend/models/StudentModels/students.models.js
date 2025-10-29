@@ -69,7 +69,7 @@ const studentSchema = new mongoose.Schema(
       default: "",
     },
     points: {
-      // This Property is used because is a feature provide to a Student they collect some points and to share students some pdfs and
+      // This Fperty is used because is a feature provide to a Student they collect some points and to share students some pdfs and
       // earn points and that with the help of points we give some Money . It's is also work in when a one student got a maximum number in
       // there paper and result like mst and ut and for other tasks
       type: Number,

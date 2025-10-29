@@ -2,6 +2,38 @@
 
 import mongoose from "mongoose";
 
+const studentDetails = new mongoose.Schema({
+  subject: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    totalMark: {
+      type: Number,
+      required: true,
+      trim: true,
+    },
+    markObtainted: {
+      type: Number,
+      required: true,
+      trim: true,
+    },
+    grade: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    result: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    studentAbsent: {
+      type: Boolean,
+      default: false,
+    },
+})
+
 const StudentMarkDetailSchema = new mongoose.Schema(
   {
     StudentName: {
@@ -70,35 +102,23 @@ const StudentMarkDetailSchema = new mongoose.Schema(
       trim: true,
       enum: ["teacher", "hod"],
     },
-    subject: {
-      type: String,
-      required: true,
-      trim: true,
+    studentDetails:[studentDetails],
+    collegeName:{
+      type:String,
+      required
     },
-    totalMark: {
-      type: Number,
-      required: true,
-      trim: true,
+    motherName:{
+      type:String,
+      required
     },
-    markObtainted: {
-      type: Number,
-      required: true,
-      trim: true,
+    overallResult:{
+      type:String,
+      required
     },
-    grade: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    result: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    studentAbsent: {
-      type: String,
-      default: "",
-    },
+    note:{
+      type:String,
+      default:""
+    }
   },
   { timestamps: true }
 );
