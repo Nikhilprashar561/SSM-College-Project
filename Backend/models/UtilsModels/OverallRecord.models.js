@@ -4,11 +4,11 @@ import mongoose from "mongoose";
 
 const MarkSheetPdfSchema = new mongoose.Schema(
   {
-    pdfLink: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    // pdfLink: {
+    //   type: String,
+    //   required: true,
+    //   trim: true,
+    // },
     className: {
       type: String,
       required: true,
