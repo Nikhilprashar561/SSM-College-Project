@@ -40,14 +40,6 @@ const StudentMarkDetailSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    StudentUsername: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-      trim: true,
-      index: true,
-    },
     email: {
       type: String,
       required: true,
@@ -85,8 +77,8 @@ const StudentMarkDetailSchema = new mongoose.Schema(
     gender: {
       type: String,
       enum: {
-        values: ["male", "female", "other"],
-        message: "Gender must be either male, female, or other",
+        values: ["Male", "Female", "Other"],
+        message: "Gender must be either Male, Female, or Other",
       },
       required: true,
     },
@@ -105,20 +97,35 @@ const StudentMarkDetailSchema = new mongoose.Schema(
     studentDetails:[studentDetails],
     collegeName:{
       type:String,
-      required
+      required: true
     },
     motherName:{
       type:String,
-      required
+      required: true
     },
     overallResult:{
       type:String,
-      required
+      required: true
     },
     note:{
       type:String,
       default:""
-    }
+    },
+    studentAllDetails:[],
+    department: {
+      type: String,
+      required: true,
+      index: true,
+      unique: true,
+      enum: {
+        values: [
+          "Department of Computer Science",
+          "Department of Commerce",
+          "Department of Arts",
+        ],
+        message: "Invalid department. Not allowed.",
+      },
+    },
   },
   { timestamps: true }
 );

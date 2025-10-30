@@ -4,6 +4,7 @@ import { HodModels } from "../models/HodModels/hod.models.js";
 import { paperAssignPlaceModels } from "../models/HodModels/PaperAssignPlace.models.js";
 import { timeTableModels } from "../models/HodModels/TimeTables.models.js";
 import { PrincipalModels } from "../models/PrincipalModels/principal.models.js";
+import { StudentModels } from "../models/StudentModels/students.models.js";
 import { TeacherModels } from "../models/TeacherModels/teacher.models.js";
 import { AssignTaskModels } from "../models/UtilsModels/AssignTask.models.js";
 import { EventsModels } from "../models/UtilsModels/Event.models.js";
@@ -11,10 +12,11 @@ import { MarkSheetModels } from "../models/UtilsModels/MarkSheet.models.js";
 import { NotificationsModels } from "../models/UtilsModels/Notifications.models.js";
 import { MarkSheetPdfModels } from "../models/UtilsModels/OverallRecord.models.js";
 import { sentMoneyReqModels } from "../models/UtilsModels/sentRequestMoney.models.js";
+import { StudentMarkDetailModels } from "../models/UtilsModels/StudentMarkDetails.models.js";
 import { ApiErrors } from "../utils/ApiError.js";
 import { ApiRes } from "../utils/ApiRes.js";
 import { uploadOnCloudinary } from "../utils/Cloudinary.js";
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
 
 const EventController = async (req, res) => {
   const { descriptions, text, uploadByModel } = req.body;
@@ -607,8 +609,8 @@ const overallRecordController = async (req, res) => {
     studentName,
     createBy: user?._id,
     department: user?.department,
-    teacherAvatar:user?.avatar,
-    days: currentDay
+    teacherAvatar: user?.avatar,
+    days: currentDay,
   });
   if (!createOverallRecord) {
     throw new ApiErrors(400, "Some Error occur while create overall record");
@@ -624,7 +626,63 @@ const overallRecordController = async (req, res) => {
     );
 };
 
-const studentMarksDetailsController = async (req, res) => {};
+const studentMarksDetailsController = async (req, res) => {
+  const {
+    roll_no,
+    collegeName,
+    note,
+    studentDetails,
+    overallResult,
+    department,
+  } = req.body;
+  if (!roll_no || !studentDetails || !overallResult || !department) {
+    throw new ApiErrors(400, "All fields are required");
+  }
+  const find = await StudentModels.findOne({ roll_no }).select(
+    "-password -refresh_token -points -last_login -payment -subjects -plan -subjectPdf -numberOfSubjectBuy -verifyOtp -OtpExpiry -isVerify -verifyId -token -tokenExpiry -createdAt -updatedAt -__v"
+  );
+  if (!find) {
+    throw new ApiErrors(400, "Student not find with these credentails");
+  }
+  if (collegeName !== "SSM College Dinanagar") {
+    throw new ApiErrors(400, "Change you college name");
+  }
+  const user = req?.user;
+  if (user?.department != department) {
+    throw new ApiErrors(400, "You have not access to create");
+  }
+  const createStudentDetails = await StudentMarkDetailModels.create({
+    assignModels: user?.role,
+    teacherAssign: user?._id,
+    avatar: find.avatar,
+    class: find.className,
+    email: find.email,
+    father_name: find.father_name,
+    gender: find.gender,
+    mobile_no: find.mobile_no,
+    motherName: find.mother_name,
+    roll_no: find.roll_no,
+    StudentName: find.fullname,
+    collegeName,
+    note,
+    studentDetails,
+    overallResult,
+    department,
+    studentAllDetails: find,
+  });
+  if (!createStudentDetails) {
+    throw new ApiErrors(400, "Some Error occur when create student result");
+  }
+  return res
+    .status(200)
+    .json(
+      new ApiRes(
+        200,
+        createStudentDetails,
+        `Student Result was created successFully ${user?.firstname}`
+      )
+    );
+};
 
 export {
   timeTableController,
