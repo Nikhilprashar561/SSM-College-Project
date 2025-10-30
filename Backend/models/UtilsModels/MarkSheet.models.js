@@ -70,7 +70,7 @@ const MarkSheetSchema = new mongoose.Schema(
       trim: true,
       enum: ["teacher", "hod"],
     },
-    Date: {
+    date: {
       type: Date,
       required: true,
       default: Date.now(),

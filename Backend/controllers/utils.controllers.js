@@ -7,7 +7,9 @@ import { PrincipalModels } from "../models/PrincipalModels/principal.models.js";
 import { TeacherModels } from "../models/TeacherModels/teacher.models.js";
 import { AssignTaskModels } from "../models/UtilsModels/AssignTask.models.js";
 import { EventsModels } from "../models/UtilsModels/Event.models.js";
+import { MarkSheetModels } from "../models/UtilsModels/MarkSheet.models.js";
 import { NotificationsModels } from "../models/UtilsModels/Notifications.models.js";
+import { MarkSheetPdfModels } from "../models/UtilsModels/OverallRecord.models.js";
 import { sentMoneyReqModels } from "../models/UtilsModels/sentRequestMoney.models.js";
 import { ApiErrors } from "../utils/ApiError.js";
 import { ApiRes } from "../utils/ApiRes.js";
@@ -498,9 +500,129 @@ const DateSheetController = async (req, res) => {
     );
 };
 
-const studentMarkSheetController = async (req, res) => {};
+const studentMarkSheetController = async (req, res) => {
+  const {
+    className,
+    collegeName,
+    department,
+    description,
+    examType,
+    subject,
+    studentsDetails,
+  } = req.body;
+  if (!subject || !examType || !department || !studentsDetails) {
+    throw new ApiErrors(400, "All fields are required");
+  }
+  const check = await MarkSheetModels.findOne({ subject });
+  if (check) {
+    if (check.subject === subject) {
+      throw new ApiErrors(
+        400,
+        "With these subject name marksheet already Please delete Previous one."
+      );
+    }
+  }
+  const user = req?.user;
+  if (user?.department != department) {
+    throw new ApiErrors(
+      400,
+      "You have not access to create these deparment Marksheet"
+    );
+  }
+  const currentDay = new Date(Date.now()).toLocaleString("en-US", {
+    weekday: "long",
+  });
+  console.log(currentDay);
 
-const overallRecordController = async (req, res) => {};
+  const createMarkSheet = await MarkSheetModels.create({
+    assignModels: user?.role,
+    className,
+    collegeName,
+    days: currentDay,
+    department,
+    description,
+    examType,
+    subject,
+    teacherAssign: user?._id,
+    studentsDetails,
+  });
+  if (!createMarkSheet) {
+    throw new ApiErrors(400, "Error was occur when we are create marksheet");
+  }
+  return res
+    .status(200)
+    .json(
+      new ApiRes(
+        201,
+        { data: createMarkSheet, user: user?.firstname + "" + user?.lastname },
+        `Marksheet was created SuccessFully by ${user?.firstname} Mam`
+      )
+    );
+};
+
+const overallRecordController = async (req, res) => {
+  const {
+    className,
+    description,
+    paper,
+    roll_no,
+    subject,
+    studentName,
+    department,
+  } = req.body;
+  if (
+    !className ||
+    !description ||
+    !paper ||
+    !roll_no ||
+    !subject ||
+    !studentName ||
+    !department
+  ) {
+    throw new ApiErrors(400, "All field are required");
+  }
+  const check = await MarkSheetPdfModels.findOne({ subject });
+  if (check) {
+    if (check.subject === subject) {
+      throw new ApiErrors(
+        400,
+        "With these subject name marksheet already Please delete Previous one."
+      );
+    }
+  }
+  const user = req?.user;
+  if (user?.department != department) {
+    throw new ApiErrors(400, "You have not Access to Create");
+  }
+  const currentDay = new Date(Date.now()).toLocaleString("en-US", {
+    weekday: "long",
+  });
+  // console.log(currentDay);
+  const createOverallRecord = await MarkSheetPdfModels.create({
+    className,
+    description,
+    paper,
+    roll_no,
+    subject,
+    studentName,
+    createBy: user?._id,
+    department: user?.department,
+    teacherAvatar:user?.avatar,
+    days: currentDay
+  });
+  if (!createOverallRecord) {
+    throw new ApiErrors(400, "Some Error occur while create overall record");
+  }
+  return res
+    .status(200)
+    .json(
+      new ApiRes(
+        200,
+        createOverallRecord,
+        `Overall record was created successFully by ${user?.firstname}`
+      )
+    );
+};
 
 const studentMarksDetailsController = async (req, res) => {};
 
