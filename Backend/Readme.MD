@@ -211,4 +211,4 @@ so that the app can be used more effectively.
 ## 🧑‍💻 Author
 
 **Nikhil Sharma**  
-Full Stack MERN Developer 😊
+Full Stack Developer 😊
