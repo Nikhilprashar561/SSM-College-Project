@@ -1,4 +1,4 @@
-# 🎓 College Management System (MERN Stack)
+# College Management System (MERN Stack)
 
 This is a **full-stack College Management System** built using **MERN Stack technology** (MongoDB, Express.js, React.js, Node.js).
 
@@ -8,14 +8,14 @@ In simple terms, this project acts as a **college management software** that str
 
 ---
 
-## 🧠 Project Overview
+##  Project Overview
 
 Every part of this project — from models and controllers to API routes and frontend components — has been carefully structured and written with clarity and purpose.  
 You can explore the `backend/models` folder to understand each **data model** and its reasoning, where I’ve explained the logic and need behind every entity.
 
 ---
 
-## 🖥️ Backend Overview
+##  Backend Overview
 
 **Technologies Used:**
 - **Node.js** → Backend runtime environment  
@@ -36,7 +36,7 @@ You can explore the `backend` folder to see how each part of the server-side cod
 
 ---
 
-## 💻 Frontend Overview
+##  Frontend Overview
 
 **Technologies Used:**
 - **React.js** → For building a fast, responsive frontend  
@@ -52,16 +52,16 @@ You can explore the `frontend` folder to see the clean folder structure and how 
 
 ---
 
-## 🚀 Key Features
+##  Key Features
 
-- 🔐 User authentication & authorization (JWT)
-- 📧 Email verification via Nodemailer & Resend API
-- ☁️ Cloud-based file storage using Cloudinary
-- 🧾 Organized data models using Mongoose
-- ⚙️ RESTful APIs tested with Postman
-- 🧩 Modular frontend structure using React + Redux
-- 🎨 Beautiful and modern UI powered by ShadCN components
+-  User authentication & authorization (JWT)
+-  Email verification via Nodemailer & Resend API
+-  Cloud-based file storage using Cloudinary
+-  Organized data models using Mongoose
+-  RESTful APIs tested with Postman
+-  Modular frontend structure using React + Redux
+-  Beautiful and modern UI powered by ShadCN components
 
 ---
 
-## 📂 Project Structure
+## Project Structure
