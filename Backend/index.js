@@ -13,5 +13,5 @@ connectDB().then(() => {
         console.log(`Server started at : ${PORT}`)
     })
 }).catch((err) => {
-    console.log(`Server Crashed`, err)
+    console.log(`Server Crashed ${err}`)
 })
