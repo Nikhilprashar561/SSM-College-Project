@@ -1,6 +1,5 @@
 # Here i write frontend flow of my porject 👇
 
-
 ##  Frontend Page Planning
 
 Below is the list of required frontend pages based on model usage.
