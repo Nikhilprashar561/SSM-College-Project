@@ -1,12 +1,12 @@
 import App from "@/App";
 import { createBrowserRouter } from "react-router-dom";
 import { Home } from "@/pages/Home";
-import { Login } from "@/pages/auth/login";
-import { DeveloperRegister } from "@/pages/auth/developerRegister";
-import { HodRegister } from "@/pages/auth/hodRegister";
-import { TeacherRegister } from "@/pages/auth/teacherRegister";
-import { PrincipalRegister } from "@/pages/auth/principalRegister";
-import { StudentRegister } from "@/pages/auth/studentRegister";
+import { Login } from "@/pages/auth/Login";
+import { DeveloperRegister } from "@/pages/auth/DeveloperRegister";
+import { HodRegister } from "@/pages/auth/HodRegister";
+import { TeacherRegister } from "@/pages/auth/TeacherRegister";
+import { PrincipalRegister } from "@/pages/auth/PrincipalRegister";
+import { StudentRegister } from "@/pages/auth/StudentRegister";
 import { StudentHelp } from "@/pages/core/StudentHelp";
 import { StudentFeedback } from "@/pages/core/StudentFeedback";
 import { StudentComplaint } from "@/pages/core/StudentComplaint";
