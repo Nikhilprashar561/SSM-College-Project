@@ -83,7 +83,7 @@ const userHelpController = async (req, res) => {
         : principalUser?.role == "principal"
           ? "principal"
           : "User Not Found";
-  console.log(`Behnchod yeh hai user ka type ${userType}`);
+  // console.log(`Behnchod yeh hai user ka type ${userType}`);
 
   const imagePath = req?.files?.image[0]?.path;
   let imageLink;

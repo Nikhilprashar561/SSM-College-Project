@@ -482,7 +482,7 @@ const studentAchivementController = async (req, res) => {
     throw new ApiErrors(400, "user not found with this id");
   }
 
-  console.log(req?.files);
+  // console.log(req?.files);
   const imagefilepath = req?.files?.image[0]?.path;
 
   console.log("Yeh hai BSDK file path", imagefilepath);
@@ -650,6 +650,7 @@ export {
   changePassword,
   forgotPassword,
   verifyOtpEmail,
+
   studentAchivementController,
   studentComplaintController,
   studentFeedbackController,
