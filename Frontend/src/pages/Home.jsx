@@ -1,7 +1,14 @@
-import React from 'react'
+import { HeroSection } from "@/components/HeroSection";
+import { OurStudents } from "@/components/OurStudents";
+import Principal from "@/components/Principal";
+import React from "react";
 
 export const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
+    <>
+      <HeroSection />
+      <Principal />
+      <OurStudents />
+    </>
+  );
+};

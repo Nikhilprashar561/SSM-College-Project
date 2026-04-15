@@ -7,7 +7,7 @@ function App() {
   return (
     <>
      <Header/>
-      <main className='min-h-[80vh] flex flex-col items-center justify-center'>
+      <main className='min-h-[85vh] flex flex-col items-center justify-center'>
           <Outlet/>
       </main>
       <Footer/>

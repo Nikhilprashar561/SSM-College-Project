@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const [menuOpen, setMenuOpen] = React.useState(false);
-  const navItems = ["Products", "Services", "Apps", "Pricing", "About"];
+  const navItems = ["Principal", "Events", "Notifications", "Departments", "Students"];
 
   return (
     <>
@@ -14,8 +15,13 @@ export const Header = () => {
                     }
                 `}
       </style>
-      <nav className="bg-white px-6 md:px-12 lg:px-24 xl:px-40 py-4 flex items-center justify-between relative">
-        <a href="https://prebuiltui.com">
+    <div className='absolute top-[-50px] z-50'>
+      <Link href="">
+        <img width={"400px"} src="ssm.png" alt="" />
+      </Link>
+    </div>
+      <nav className="bg-white px-6 md:px-12 lg:px-24 xl:px-40 py-6 flex items-center justify-between relative">
+        <Link className="invisible" href="">
           <svg
             width="151"
             height="36"
@@ -35,14 +41,14 @@ export const Header = () => {
               strokeLinejoin="round"
             />
           </svg>
-        </a>
+        </Link>
 
         <div className="hidden md:flex items-center bg-zinc-50 border border-zinc-200 rounded-full px-1 py-1 gap-2">
           {navItems.map((item) => (
             <a
               key={item}
               href="#"
-              className={`px-4 py-1.5 rounded-full text-sm transition-colors ${item === "Products" ? "bg-white border border-zinc-200 font-medium text-zinc-800 hover:text-zinc-600" : "text-zinc-500 hover:text-zinc-400"}`}
+              className={`px-4 py-1.5 rounded-full text-sm transition-colors ${item === "Principal" ? "bg-white border border-zinc-200 font-medium text-zinc-800 hover:text-zinc-600" : "text-zinc-500 hover:text-zinc-400"}`}
             >
               {item}
             </a>
@@ -88,16 +94,16 @@ export const Header = () => {
         {menuOpen && (
           <div className="absolute top-full left-0 w-full bg-white border-t border-zinc-200 flex flex-col p-5 gap-1 md:hidden z-50">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item}
                 href="#"
                 className={`px-4 py-2.5 rounded-lg text-sm ${item === "Products" ? "bg-zinc-50 font-medium text-zinc-800" : "text-zinc-500 hover:bg-zinc-50"}`}
               >
                 {item}
-              </a>
+              </Link>
             ))}
             <button className="flex items-center justify-center gap-2.5 bg-linear-to-r from-zinc-950 to-zinc-500 text-zinc-50 text-sm font-medium px-5 py-2.5 rounded-full cursor-pointer border-0 mt-3 w-fit">
-              Get started
+              For Admission
               <span className="size-7 rounded-full bg-white flex items-center justify-center">
                 <svg
                   width="12"
