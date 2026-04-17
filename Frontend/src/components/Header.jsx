@@ -4,7 +4,7 @@ import SelectLoginType from "./SelectLoginType";
 
 export const Header = () => {
   const [menuOpen, setMenuOpen] = React.useState(false);
-  const navItems = [{value:"Principal", link: "/principal"}, {value:"Events", link: "/events"}, {value:"Notifications", link: "/notification"}, {value:"Departments", link: "/departments"}, {value:"Students", link: "/students"}, {value:"Links", link: "/important-links"}];
+  const navItems = [{value:"Principal", link: "/principal"}, {value:"Events", link: "/events"}, {value:"Notifications", link: "/notifications"}, {value:"Departments", link: "/departments"}, {value:"Students", link: "/students"}, {value:"Links", link: "/important-links"}];
   const [SelectOpen, setSelectOpen] = React.useState(false)
 
   return (

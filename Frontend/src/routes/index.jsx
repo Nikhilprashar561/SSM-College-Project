@@ -61,7 +61,7 @@ const router = createBrowserRouter([
         element: <Events />,
       },
       {
-        path: "notification",
+        path: "notifications",
         element: <NotificationPage />,
       },
       {
@@ -84,11 +84,11 @@ const router = createBrowserRouter([
       },
       {
         path: "students",
-        element: <Students/>,
+        element: <Students />,
       },
       {
         path: "important-links",
-        element: <ImportantLinks/>,
+        element: <ImportantLinks />,
       },
       {
         path: "login",
