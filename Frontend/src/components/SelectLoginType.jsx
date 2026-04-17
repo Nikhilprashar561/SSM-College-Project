@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const SelectLoginType = ({ close }) => {
 
@@ -34,21 +35,21 @@ const SelectLoginType = ({ close }) => {
         {open && (
           <ul className="overflow-hidden w-44 text-black bg-white border rounded shadow-md mt-2 py-1">
             <li className="px-4 py-2 hover:bg-gray-500/10">
-              <a href="/principal-register">Principal</a>
+              <Link to="/principal-register">Principal</Link>
             </li>
             <li className="px-4 py-2 hover:bg-gray-500/10">
-              <a href="/hod-register">Head of Department</a>
-            </li>
-
-            <li className="px-4 py-2 hover:bg-gray-500/10">
-              <a href="/teacher-register">College Teacher</a>
+              <Link to="/hod-register">Head of Department</Link>
             </li>
 
             <li className="px-4 py-2 hover:bg-gray-500/10">
-              <a href="/student-register">College Student</a>
+              <Link to="/teacher-register">College Teacher</Link>
+            </li>
+
+            <li className="px-4 py-2 hover:bg-gray-500/10">
+              <Link to="/student-register">College Student</Link>
             </li>
             <li className="px-4 py-2 hover:bg-gray-500/10">
-              <a href="/devloper-register">Admin Developer</a>
+              <Link to="/devloper-register">Admin Developer</Link>
             </li>
           </ul>
         )}
