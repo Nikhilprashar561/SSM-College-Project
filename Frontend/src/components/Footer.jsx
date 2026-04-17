@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
@@ -10,13 +11,13 @@ export const Footer = () => {
                     font-family: "Poppins", sans-serif;Z
                 }
             `}</style>
-      <footer className="bg-gray-700 py-12 px-4 sm:px-6 lg:px-8">
+      <footer className="bg-gray-700 py-12 mt-10 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-7xl mx-auto">
           <div className="flex flex-wrap justify-between gap-y-12 lg:gap-x-8">
             <div className="w-full md:w-[45%] lg:w-[35%] flex flex-col items-center md:items-start text-center md:text-left">
-              <a className="text-3xl text-white" href="https://prebuiltui.com">
+              <Link className="text-3xl text-white" href="https://prebuiltui.com">
                 SSM College <br/> Dinanagar
-              </a>
+              </Link>
               <div className="w-full max-w-52 h-px mt-8 bg-linear-to-r from-black via-white/25 to-black"></div>
               <p className="text-sm text-white/60 mt-6 max-w-sm leading-relaxed">
                 Empowering students through quality education, innovation, and growth. Shaping future leaders with knowledge, skills, and real-world experience
@@ -28,66 +29,66 @@ export const Footer = () => {
                 Important Links
               </h3>
               <div className="flex flex-col gap-2 mt-6">
-                <a
+                <Link
                   href="#"
                   className="text-sm text-white/60 hover:text-white transition-colors"
                 >
                   College Events
-                </a>
-                <a
+                </Link>
+                <Link
                   href="#"
                   className="text-sm text-white/60 hover:text-white transition-colors"
                 >
                   Teachers
-                </a>
-                <a
+                </Link>
+                <Link
                   href="#"
                   className="text-sm text-white/60 hover:text-white transition-colors"
                 >
                   HOD's
-                </a>
-                <a
+                </Link>
+                <Link
                   href="#"
                   className="text-sm text-white/60 hover:text-white transition-colors"
                 >
                   Student Achivements
-                </a>
-                <a
+                </Link>
+                <Link
                   href="#"
                   className="text-sm text-white/60 hover:text-white transition-colors"
                 >
                   Courses Offered
-                </a>
+                </Link>
               </div>
             </div>
 
             <div className="w-full md:w-[45%] lg:w-[15%] flex flex-col items-center md:items-start text-center md:text-left">
               <h3 className="text-sm text-white font-medium">Departments</h3>
               <div className="flex flex-col gap-2 mt-6">
-                <a
+                <Link
                   href="#"
                   className="text-sm text-white/60 hover:text-white transition-colors"
                 >
                   Computer Science
-                </a>
-                <a
+                </Link>
+                <Link
                   href="#"
                   className="text-sm text-white/60 hover:text-white transition-colors"
                 >
                   Commerce
-                </a>
-                <a
+                </Link>
+                <Link
                   href="#"
                   className="text-sm text-white/60 hover:text-white transition-colors"
                 >
                   Arts & Science
-                </a>
-                <a
+                </Link>
+                <Link
                   href="#"
                   className="text-sm text-white/60 hover:text-white transition-colors"
                 >
                  Fashion Designing
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -117,19 +118,19 @@ export const Footer = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-xs text-white/60">© 2026 SSM College</p>
             <div className="flex items-center gap-6">
-              <a
+              <Link
                 href="#"
                 className="text-xs text-white/60 hover:text-white transition-colors"
               >
                 Terms & Conditions
-              </a>
+              </Link>
               <div className="w-px h-4 bg-white/20"></div>
-              <a
+              <Link
                 href="#"
                 className="text-xs text-white/60 hover:text-white transition-colors"
               >
                 Privacy Policy
-              </a>
+              </Link>
             </div>
           </div>
         </div>

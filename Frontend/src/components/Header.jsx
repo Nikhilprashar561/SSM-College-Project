@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import SelectLoginType from "./SelectLoginType";
 
 export const Header = () => {
   const [menuOpen, setMenuOpen] = React.useState(false);
-  const navItems = ["Principal", "Events", "Notifications", "Departments", "Students"];
+  const navItems = [{value:"Principal", link: "/principal"}, {value:"Events", link: "/events"}, {value:"Notifications", link: "/notification"}, {value:"Departments", link: "/departments"}, {value:"Students", link: "/students"}, {value:"Links", link: "/important-links"}];
+  const [SelectOpen, setSelectOpen] = React.useState(false)
 
   return (
     <>
@@ -20,7 +22,7 @@ export const Header = () => {
         <img width={"400px"} src="ssm.png" alt="" />
       </Link>
     </div>
-      <nav className="bg-white px-6 md:px-12 lg:px-24 xl:px-40 py-6 flex items-center justify-between relative">
+      <nav className="bg-white px-6 md:px-12 lg:px-24 xl:px-40 overflow-hidden py-6 flex items-center justify-between relative">
         <Link className="invisible" href="">
           <svg
             width="151"
@@ -45,19 +47,19 @@ export const Header = () => {
 
         <div className="hidden md:flex items-center bg-zinc-50 border border-zinc-200 rounded-full px-1 py-1 gap-2">
           {navItems.map((item) => (
-            <a
-              key={item}
-              href="#"
-              className={`px-4 py-1.5 rounded-full text-sm transition-colors ${item === "Principal" ? "bg-white border border-zinc-200 font-medium text-zinc-800 hover:text-zinc-600" : "text-zinc-500 hover:text-zinc-400"}`}
+            <Link
+              key={item.value}
+              to={item.link}
+              className={`px-4 py-1.5 rounded-full text-sm transition-colors ${item.value === "Principal" ? "bg-white border border-zinc-200 font-medium text-zinc-800 hover:text-zinc-600" : "text-zinc-500 hover:text-zinc-400"}`}
             >
-              {item}
-            </a>
+              {item.value}
+            </Link>
           ))}
         </div>
 
-        <button className="hidden md:flex items-center gap-2.5 bg-linear-to-r from-zinc-950 to-zinc-500 text-zinc-50 hover:text-zinc-200 text-sm font-medium pl-5 pr-2 py-2 rounded-full cursor-pointer border-0">
-          Get started
-          <span className="size-7 rounded-full bg-white flex items-center justify-center">
+        <button onClick={() => setSelectOpen(true)} className="hidden md:flex items-center gap-2.5 bg-linear-to-r bg-indigo-500 hover:bg-indigo-600 text-zinc-50 hover:text-zinc-200 text-sm font-medium pl-5 pr-2 py-2 rounded-full cursor-pointer border-0">
+          Start
+          <span className="size-6 rounded-full bg-white flex items-center justify-center">
             <svg
               width="12"
               height="10"
@@ -103,7 +105,7 @@ export const Header = () => {
               </Link>
             ))}
             <button className="flex items-center justify-center gap-2.5 bg-linear-to-r from-zinc-950 to-zinc-500 text-zinc-50 text-sm font-medium px-5 py-2.5 rounded-full cursor-pointer border-0 mt-3 w-fit">
-              For Admission
+              Start
               <span className="size-7 rounded-full bg-white flex items-center justify-center">
                 <svg
                   width="12"
@@ -125,6 +127,7 @@ export const Header = () => {
           </div>
         )}
       </nav>
+          {SelectOpen && <SelectLoginType close={() => setSelectOpen(false)} />}
     </>
   );
 };

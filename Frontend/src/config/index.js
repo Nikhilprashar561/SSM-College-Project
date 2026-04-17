@@ -146,12 +146,15 @@ export const registerControlsForHod = [
     componentsType: "input",
     type: "password",
   },
-  {
-    name: "department",
+{
     label: "Department",
-    placeholder: "Enter Your Department",
-    componentsType: "input",
-    type: "text",
+    name: "Department",
+    componentType: "select",
+    options: [
+      { id: "computer", label: "Department of Computer Science" },
+      { id: "arts", label: "Departments of Arts" },
+      { id: "science", label: "Departments of Science" },
+    ],
   },
   {
     name: "lastname",

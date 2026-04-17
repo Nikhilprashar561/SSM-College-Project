@@ -24,6 +24,16 @@ import { DateSheet } from "@/pages/utils/DateSheet";
 import { StudentMark } from "@/pages/utils/StudentMark";
 import { StudentOverall } from "@/pages/utils/StudentOverall";
 import { StudentDetails } from "@/pages/utils/StudentDetails";
+import { Building } from "@/pages/Building";
+import { Courses } from "@/pages/Courses";
+import { PrincipalPage } from "@/pages/PrincipalPage";
+import { Events } from "@/pages/Events";
+import { NotificationPage } from "@/pages/NotificationPage";
+import { Departments } from "@/pages/Departments";
+import { Students } from "@/pages/Students";
+import { ImportantLinks } from "@/pages/ImportantLinks";
+import { DeptComputer } from "@/pages/DeptComputer";
+import { DeptArts } from "@/pages/DeptArts";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +43,52 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Home />,
+      },
+      {
+        path: "building",
+        element: <Building />,
+      },
+      {
+        path: "courses",
+        element: <Courses />,
+      },
+      {
+        path: "principal",
+        element: <PrincipalPage />,
+      },
+      {
+        path: "events",
+        element: <Events />,
+      },
+      {
+        path: "notification",
+        element: <NotificationPage />,
+      },
+      {
+        path: "departments",
+        element: <Departments />,
+        children: [
+          {
+            path: "department-computer-science",
+            element: <DeptComputer />
+          },
+          {
+            path: "department-arts-science",
+            element: <DeptArts />
+          },
+          {
+            path: "department-commerce",
+            element: <DeptComputer />
+          },
+        ]
+      },
+      {
+        path: "students",
+        element: <Students/>,
+      },
+      {
+        path: "important-links",
+        element: <ImportantLinks/>,
       },
       {
         path: "login",

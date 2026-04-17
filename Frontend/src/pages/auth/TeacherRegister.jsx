@@ -17,7 +17,7 @@ export const TeacherRegister = () => {
           alert("Abe Chirkunde");
         }
   return (
-    <div className="mx-auto w-full max-w-md space-y-6">
+    <div className="mx-auto mt-10 w-full max-w-md space-y-6">
       <div className="text-center">
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
           Create new account
@@ -26,7 +26,7 @@ export const TeacherRegister = () => {
           Already have an account
           <Link
             className="font-medium ml-2 text-primary hover:underline"
-            to="/auth/login"
+            to="/login"
           >
             Login
           </Link>
