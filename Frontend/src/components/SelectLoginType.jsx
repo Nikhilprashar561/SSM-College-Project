@@ -6,6 +6,8 @@ const SelectLoginType = ({ close }) => {
 
   const [open, setOpen] = useState(false);
 
+  
+
   return (
     <div
       className="
@@ -35,21 +37,21 @@ const SelectLoginType = ({ close }) => {
         {open && (
           <ul className="overflow-hidden w-44 text-black bg-white border rounded shadow-md mt-2 py-1">
             <li className="px-4 py-2 hover:bg-gray-500/10">
-              <Link to="/principal-register">Principal</Link>
+              <Link onClick={close} to="/principal-register">Principal</Link>
             </li>
             <li className="px-4 py-2 hover:bg-gray-500/10">
-              <Link to="/hod-register">Head of Department</Link>
-            </li>
-
-            <li className="px-4 py-2 hover:bg-gray-500/10">
-              <Link to="/teacher-register">College Teacher</Link>
+              <Link onClick={close} to="/hod-register">Head of Department</Link>
             </li>
 
             <li className="px-4 py-2 hover:bg-gray-500/10">
-              <Link to="/student-register">College Student</Link>
+              <Link onClick={close} to="/teacher-register">College Teacher</Link>
+            </li>
+
+            <li className="px-4 py-2 hover:bg-gray-500/10">
+              <Link onClick={close} to="/student-register">College Student</Link>
             </li>
             <li className="px-4 py-2 hover:bg-gray-500/10">
-              <Link to="/devloper-register">Admin Developer</Link>
+              <Link onClick={close} to="/devloper-register">Admin Developer</Link>
             </li>
           </ul>
         )}

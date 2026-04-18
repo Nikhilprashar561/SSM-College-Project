@@ -1,0 +1,123 @@
+// data/linksData.js
+import {
+  FaUserGraduate,
+  FaCommentDots,
+  FaExclamationCircle,
+  FaTrophy,
+  FaImage,
+  FaUpload,
+  FaCalendarAlt,
+  FaHandsHelping,
+  FaClock,
+  FaMoneyBill,
+  FaTasks,
+  FaFileAlt,
+  FaClipboardList,
+  FaBell,
+  FaChartBar,
+} from "react-icons/fa";
+
+export const linksData = [
+  {
+    title: "Student Help",
+    description: "Get help and support",
+    path: "/student-help",
+    icon: FaHandsHelping,
+  },
+  {
+    title: "Student Feedback",
+    description: "Give your feedback",
+    path: "/student-feedback",
+    icon: FaCommentDots,
+  },
+  {
+    title: "Student Complaint",
+    description: "Raise complaints",
+    path: "/student-complaint",
+    icon: FaExclamationCircle,
+  },
+  {
+    title: "Student Achievement",
+    description: "View achievements",
+    path: "/student-achivement",
+    icon: FaTrophy,
+  },
+  {
+    title: "Student Image",
+    description: "Upload images",
+    path: "/student-image",
+    icon: FaImage,
+  },
+  {
+    title: "Subject Upload",
+    description: "Upload subjects",
+    path: "/subject-upload",
+    icon: FaUpload,
+  },
+  {
+    title: "Events",
+    description: "Check events",
+    path: "/event",
+    icon: FaCalendarAlt,
+  },
+  {
+    title: "User Help",
+    description: "User support",
+    path: "/user-help",
+    icon: FaUserGraduate,
+  },
+  {
+    title: "Time Table",
+    description: "View schedule",
+    path: "/time-table",
+    icon: FaClock,
+  },
+  {
+    title: "Send Money",
+    description: "Money requests",
+    path: "/sent-money-request",
+    icon: FaMoneyBill,
+  },
+  {
+    title: "Assign Task",
+    description: "Assign tasks",
+    path: "/assign-task",
+    icon: FaTasks,
+  },
+  {
+    title: "Paper Assign",
+    description: "Assign papers",
+    path: "/paper-assign",
+    icon: FaFileAlt,
+  },
+  {
+    title: "Date Sheet",
+    description: "Exam schedule",
+    path: "/date-sheet",
+    icon: FaClipboardList,
+  },
+  {
+    title: "Marksheet",
+    description: "View marks",
+    path: "/marksheet",
+    icon: FaFileAlt,
+  },
+  {
+    title: "Mark Details",
+    description: "Detailed marks",
+    path: "/markdetails",
+    icon: FaFileAlt,
+  },
+  {
+    title: "Notification",
+    description: "Latest updates",
+    path: "/notification",
+    icon: FaBell,
+  },
+  {
+    title: "Overall",
+    description: "Overall performance",
+    path: "/overall",
+    icon: FaChartBar,
+  },
+];

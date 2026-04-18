@@ -17,7 +17,11 @@ export const HodRegister = () => {
       alert("Abe Chirkunde");
     }
   return (
-    <div className="mx-auto mt-10 w-full max-w-md space-y-6">
+    <>
+    <h5 className="text-4xl md:text-[52px]/[65px] font-semibold text-center max-w-3xl mt-16 bg-gradient-to-r from-slate-900 to-[#6D8FE4] text-transparent bg-clip-text">
+      Swami Swatantranand Memorial College, Dinanagar
+    </h5>
+    <div className="mx-auto mt-10 w-full mb-16 max-w-md space-y-6">
       <div className="text-center">
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
           Create new account
@@ -26,8 +30,8 @@ export const HodRegister = () => {
           Already have an account
           <Link
             className="font-medium ml-2 cursor-pointer text-blue-400 hover:underline"
-            to="/login"
-          >
+            to={"/login"}
+            >
             Login
           </Link>
         </p>
@@ -38,7 +42,8 @@ export const HodRegister = () => {
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}
-      />
+        />
     </div>
+    </>
   )
 }
