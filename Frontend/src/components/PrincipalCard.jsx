@@ -1,15 +1,8 @@
 import React from 'react'
 
-export const Students = () => {
-  return (
-    <>
-    <h1 class="text-center text-5xl mt-10 leading-[68px] md:text-6xl md:leading-[70px] font-semibold max-w-2xl">
-        Our Students
-      </h1>
-      <p class="text-center text-base max-w-lg mt-2">
-        Our platform helps you build, test, and deliver faster — so you can
-        focus on what matters.
-      </p>
+export const PrincipalCard = () => {
+    return (
+        <>
             <style>
                 {`
                     @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -19,7 +12,7 @@ export const Students = () => {
                 }
             </style>
 
-            <section className='bg-black text-white mt-16 mb-16 rounded-3xl py-16 px-6 md:px-16 lg:px-24 xl:px-32 flex items-center'>
+            <section className='bg-black text-white rounded-2xl py-16 px-6 md:px-16 lg:px-24 xl:px-32 flex items-center'>
                 <div className='max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center'>
                     {/* Left Content */}
                     <div className='flex flex-col items-center lg:items-start gap-6'>
@@ -57,6 +50,6 @@ export const Students = () => {
                     </div>
                 </div>
             </section>
-    </>
-  )
+        </>
+    )
 }

@@ -67,20 +67,18 @@ const router = createBrowserRouter([
       {
         path: "departments",
         element: <Departments />,
-        children: [
-          {
-            path: "department-computer-science",
-            element: <DeptComputer />
-          },
-          {
-            path: "department-arts-science",
-            element: <DeptArts />
-          },
-          {
-            path: "department-commerce",
-            element: <DeptComputer />
-          },
-        ]
+      },
+      {
+        path: "department-computer-science",
+        element: <DeptComputer />,
+      },
+      {
+        path: "department-arts-science",
+        element: <DeptArts />,
+      },
+      {
+        path: "department-commerce",
+        element: <DeptComputer />,
       },
       {
         path: "students",
@@ -112,7 +110,7 @@ const router = createBrowserRouter([
       },
       {
         path: "student-register",
-        element: <StudentRegister/>,
+        element: <StudentRegister />,
       },
       {
         path: "student-help",
@@ -120,11 +118,11 @@ const router = createBrowserRouter([
       },
       {
         path: "student-feedback",
-        element: <StudentFeedback/>,
+        element: <StudentFeedback />,
       },
       {
         path: "student-complaint",
-        element: <StudentComplaint/>,
+        element: <StudentComplaint />,
       },
       {
         path: "student-achivement",
@@ -132,19 +130,19 @@ const router = createBrowserRouter([
       },
       {
         path: "student-image",
-        element: <StudentImage/>,
+        element: <StudentImage />,
       },
       {
         path: "subject-upload",
-        element: <SubjectUpload/>,
+        element: <SubjectUpload />,
       },
       {
         path: "event",
-        element: <Event/>,
+        element: <Event />,
       },
       {
         path: "user-help",
-        element: <UserHelp/>,
+        element: <UserHelp />,
       },
       {
         path: "time-table",
@@ -152,35 +150,35 @@ const router = createBrowserRouter([
       },
       {
         path: "sent-money-request",
-        element: <SentMoney/>,
+        element: <SentMoney />,
       },
       {
         path: "assign-task",
-        element: <AssignTask/>,
+        element: <AssignTask />,
       },
       {
         path: "paper-assign",
-        element: <PaperAssign/>,
+        element: <PaperAssign />,
       },
       {
         path: "date-sheet",
-        element: <DateSheet/>,
+        element: <DateSheet />,
       },
       {
         path: "marksheet",
-        element: <StudentMark/>,
+        element: <StudentMark />,
       },
       {
         path: "markdetails",
-        element: <StudentDetails/>,
+        element: <StudentDetails />,
       },
       {
         path: "notification",
-        element: <Notification/>,
+        element: <Notification />,
       },
       {
         path: "overall",
-        element: <StudentOverall/>,
+        element: <StudentOverall />,
       },
     ],
   },
